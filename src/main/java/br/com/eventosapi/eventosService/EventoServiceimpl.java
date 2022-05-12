@@ -27,7 +27,7 @@ public class EventoServiceimpl implements EventoService {
 
     @Override
     public Optional<Eventos> findEventoById(Long id) {
-        return Optional.empty();
+        return eventosRepo.findById(id);
     }
 
     @Override

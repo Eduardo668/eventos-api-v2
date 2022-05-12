@@ -27,10 +27,20 @@ public class Eventos {
     private double preco;
 
     @NotNull
-    @DateTimeFormat
-    private Date dataEvento;
+    private String dataEvento;
+
+    @Size(max = 100)
+    private String fotoEvento;
 
     public Eventos() {
+    }
+
+    public String getFotoEvento() {
+        return fotoEvento;
+    }
+
+    public void setFotoEvento(String fotoEvento) {
+        this.fotoEvento = fotoEvento;
     }
 
     public Long getId() {
@@ -65,11 +75,11 @@ public class Eventos {
         this.preco = preco;
     }
 
-    public Date getDataEvento() {
+    public String getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(Date dataEvento) {
+    public void setDataEvento(String dataEvento) {
         this.dataEvento = dataEvento;
     }
 

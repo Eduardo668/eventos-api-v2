@@ -11,13 +11,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/eventos")
+@CrossOrigin
 public class EventoController {
 
     @Autowired
     private EventoServiceimpl eventoService;
 
 
-    @GetMapping("/Eventos")
+    @GetMapping("/list")
     public List<Eventos> listaDeEventos(){
         return eventoService.findAllEventos();
     }
@@ -27,6 +28,7 @@ public class EventoController {
         try {
             eventoService.saveEvento(eventos);
         }catch (ConstraintViolationException e){
+            System.out.println(e);
             return "Faltou algum valor";
         }
         return "Evento cadastrado com sucesso";
@@ -51,6 +53,8 @@ public class EventoController {
         eventosOpt.get().setLocal(eventos.getLocal());
         eventosOpt.get().setPreco(eventos.getPreco());
         eventosOpt.get().setDataEvento(eventos.getDataEvento());
+        eventosOpt.get().setFotoEvento(eventos.getFotoEvento());
+        eventoService.saveEvento(eventosOpt.get());
         return "Evento editado com sucesso";
     }
 
