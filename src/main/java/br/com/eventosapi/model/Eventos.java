@@ -29,7 +29,7 @@ public class Eventos {
     @NotNull
     private String dataEvento;
 
-    @Size(max = 100)
+    @Size(max = 255)
     private String fotoEvento;
 
     public Eventos() {

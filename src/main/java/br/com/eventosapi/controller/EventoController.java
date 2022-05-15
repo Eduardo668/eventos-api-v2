@@ -2,10 +2,14 @@ package br.com.eventosapi.controller;
 
 import br.com.eventosapi.eventosService.EventoServiceimpl;
 import br.com.eventosapi.model.Eventos;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintViolationException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +28,19 @@ public class EventoController {
     }
 
     @PostMapping("/addEvento")
-    public String addEvento(@RequestBody Eventos eventos){
+    public String addEvento(@RequestBody Eventos eventos,
+                            @RequestParam("image")MultipartFile multipartFile) throws IOException {
         try {
-            eventoService.saveEvento(eventos);
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            eventos.setFotoEvento(fileName);
+            Eventos savedEvento = eventoService.saveEvento(eventos);
+
+            String uploadDir = "evento-fotos/" + savedEvento.getId();
+
+
+
+
         }catch (ConstraintViolationException e){
-            System.out.println(e);
             return "Faltou algum valor";
         }
         return "Evento cadastrado com sucesso";
