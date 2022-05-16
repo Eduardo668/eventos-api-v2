@@ -29,17 +29,17 @@ public class Eventos {
     @NotNull
     private String dataEvento;
 
-    @Size(max = 255)
-    private String fotoEvento;
+    @Lob
+    private byte[] fotoEvento;
 
     public Eventos() {
     }
 
-    public String getFotoEvento() {
+    public byte[] getFotoEvento() {
         return fotoEvento;
     }
 
-    public void setFotoEvento(String fotoEvento) {
+    public void setFotoEvento(byte[] fotoEvento) {
         this.fotoEvento = fotoEvento;
     }
 

@@ -1,5 +1,6 @@
 package br.com.eventosapi.controller;
 
+
 import br.com.eventosapi.eventosService.EventoServiceimpl;
 import br.com.eventosapi.model.Eventos;
 import org.apache.tomcat.util.http.fileupload.FileUpload;
@@ -29,14 +30,15 @@ public class EventoController {
 
     @PostMapping("/addEvento")
     public String addEvento(@RequestBody Eventos eventos,
-                            @RequestParam("image")MultipartFile multipartFile) throws IOException {
+                            @RequestParam("image")MultipartFile photo) throws IOException {
         try {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            eventos.setFotoEvento(fileName);
-            Eventos savedEvento = eventoService.saveEvento(eventos);
+//            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//            eventos.setFotoEvento(fileName);
+            eventos.setFotoEvento(photo.getBytes());
+            eventoService.saveEvento(eventos);
 
-            String uploadDir = "evento-fotos/" + savedEvento.getId();
-
+//            String uploadDir = "evento-fotos/" + savedEvento.getId();
+//            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
 
 
