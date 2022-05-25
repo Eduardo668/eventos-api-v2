@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/eventos")
-@CrossOrigin
+@CrossOrigin("*")
 public class EventoController {
 
     @Autowired
@@ -29,18 +29,11 @@ public class EventoController {
     }
 
     @PostMapping("/addEvento")
-    public String addEvento(@RequestBody Eventos eventos,
-                            @RequestParam("image")MultipartFile photo) throws IOException {
+    public String addEvento(@RequestBody Eventos eventos, @RequestParam("image") MultipartFile multipartFile)
+    throws IOException{
         try {
-//            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//            eventos.setFotoEvento(fileName);
-            eventos.setFotoEvento(photo.getBytes());
+            eventos.setFotoEvento(multipartFile.getBytes());
             eventoService.saveEvento(eventos);
-
-//            String uploadDir = "evento-fotos/" + savedEvento.getId();
-//            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
-
 
         }catch (ConstraintViolationException e){
             return "Faltou algum valor";
@@ -67,7 +60,7 @@ public class EventoController {
         eventosOpt.get().setLocal(eventos.getLocal());
         eventosOpt.get().setPreco(eventos.getPreco());
         eventosOpt.get().setDataEvento(eventos.getDataEvento());
-        eventosOpt.get().setFotoEvento(eventos.getFotoEvento());
+        eventosOpt.get().setFotoLink(eventos.getFotoLink());
         eventoService.saveEvento(eventosOpt.get());
         return "Evento editado com sucesso";
     }

@@ -15,6 +15,7 @@ public class Eventos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Size(max = 100)
     @NotNull
     private String nome_evento;
@@ -29,19 +30,21 @@ public class Eventos {
     @NotNull
     private String dataEvento;
 
-    @Lob
-    private byte[] fotoEvento;
+    @NotNull
+    @Size(max = 100)
+    private String imageLocation;
+
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
+    }
 
     public Eventos() {
     }
 
-    public byte[] getFotoEvento() {
-        return fotoEvento;
-    }
-
-    public void setFotoEvento(byte[] fotoEvento) {
-        this.fotoEvento = fotoEvento;
-    }
 
     public Long getId() {
         return id;

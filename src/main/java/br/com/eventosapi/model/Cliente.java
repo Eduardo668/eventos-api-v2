@@ -5,12 +5,16 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @ManyToMany(mappedBy = "cliente_eventos")
+//    private List<Eventos> eventoCliente;
 
     @Size(max = 100)
     @NotNull
